@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("./partials/head") %>
+</head>
+
+<body>
+    <%- include("./partials/nav") %>
+        <div>
+            <h5>
+                <%= post.title %>
+            </h5>
+            <div>
+                <div>
+                    <div>
+                        <%= post.body %>
+                    </div>
+                </div>
+                <a href="<%= post._id %>/delete"><input type="submit" , value="Delete"></a>
+                <a href="<%= post._id %>/edit"><input type="submit" , value="Edit"></a>
+</body>
+
+</html>
