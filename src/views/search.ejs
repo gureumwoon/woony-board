@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("./partials/head") %>
+</head>
+
+<body>
+    <%- include("./partials/nav") %>
+        <form method="GET">
+            <input type="text" , name="keyword" , placeholder="Search by title">
+            <input type="submit" , value="search now">
+        </form>
+        <div>
+            <tbody>
+                <% posts.forEach(function(post) { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scop="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                <a href="/boards/<%= post._id %>">
+                                    <div>
+                                        <%= post.title %>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <span>
+                                    <%= moment(post.createdAt).format('YYYY-MM-DD') %>
+                                </span>
+                            </td>
+                        </tr>
+                        <% }) %>
+            </tbody>
+            </table>
+        </div>
+</body>

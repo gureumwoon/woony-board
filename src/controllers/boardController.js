@@ -3,7 +3,7 @@ import moment from "moment";
 
 export const home = async (req, res) => {
     const posts = await Post.find({})
-        .sort({ createdAt: -1 })
+        .sort({ createdAt: "desc" })
     console.log(posts);
     return res.render("home", { pageTitle: "Home", posts, moment })
 };
@@ -34,9 +34,6 @@ export const postEdit = async (req, res) => {
     return res.redirect(`/boards/${id}`);
 };
 
-export const search = (req, res) => res.send("Search");
-
-
 export const getUpload = (req, res) => {
     return res.render("upload", { pageTitle: "Upload Board" });
 }
@@ -53,4 +50,17 @@ export const deleteBoard = async (req, res) => {
     const { id } = req.params;
     await Post.findByIdAndDelete(id);
     return res.redirect("/");
+};
+
+export const search = async (req, res) => {
+    const { keyword } = req.query;
+    let posts = [];
+    if (keyword) {
+        posts = await Post.find({
+            title: {
+                $regex: new RegExp(keyword, "i")
+            },
+        });
+    }
+    return res.render("search", { pageTitle: "Search", posts, moment });
 }
